@@ -22,7 +22,7 @@ templ Form(selectedDog Dog) {
         size={30}
         type="text"
         if selectedDog {
-          value=selectedDog.name
+          value={selectedDog.name}
         } else {
           value=""
         }
@@ -37,7 +37,7 @@ templ Form(selectedDog Dog) {
         size={30}
         type="text"
         if selectedDog {
-          value=selectedDog.breed
+          value={selectedDog.breed}
         } else {
           value=""
         }

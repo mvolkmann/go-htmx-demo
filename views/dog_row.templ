@@ -1,9 +1,9 @@
 package views
 
 templ DogRow(dog Dog, updating bool) {
-    <tr class="on-hover" id={`row-${dog.id}`}>
+    <tr class="on-hover" id={"row-" + dog.id}>
       if updating {
-        hx-swap-oob='true'
+        hx-swap-oob="true"
       }
       <td>{dog.name}</td>
       <td>{dog.breed}</td>
@@ -11,12 +11,12 @@ templ DogRow(dog Dog, updating bool) {
         <button
           class="show-on-hover"
           hx-confirm="Are you sure?"
-          hx-delete={`/dog/${dog.id}`}
+          hx-delete={"/dog/" + dog.id}
           hx-target="closest tr"
           hx-swap="outerHTML"
           type="button"
         >
-          ✕
+          Delete
         </button>
         <!-- This selects the dog which triggers a selection-change event
              which causes the form to update. -->
@@ -26,7 +26,7 @@ templ DogRow(dog Dog, updating bool) {
           hx-swap="none"
           type="button"
         >
-          ✎
+          Edit
         </button>
       </td>
     </tr>
