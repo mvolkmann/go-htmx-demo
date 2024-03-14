@@ -9,10 +9,12 @@ Verify that `$GOPATH/bin` is in your `PATH` environment variable.
 Here are the commands I ran to create this project:
 
 - `brew install go`
+- create the files `main.go` and `views/hello.templ`
+- `go mod init views`
+- `go get github.com/a-h/templ`
 - `go install github.com/a-h/templ/cmd/templ@latest`
 - `go mod init github.com/a-h/templ-examples/hello-world`
-- `go get github.com/a-h/templ`
-- create the files `hello.templ` and `main.go`
+- `go mod tidy`
 - `templ generate`
 
   This creates the file `hello_templ.go`.
