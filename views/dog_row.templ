@@ -22,7 +22,7 @@ templ DogRow(dog Dog, updating bool) {
              which causes the form to update. -->
         <button
           class="show-on-hover"
-          hx-get={'/select/' + dog.id}
+          hx-get={"/select/" + dog.id}
           hx-swap="none"
           type="button"
         >

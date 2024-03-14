@@ -45,7 +45,13 @@ templ Form(selectedDog Dog) {
     </div>
 
     <div class="buttons">
-      <button id="submit-btn">{selectedId ? 'Update' : 'Add'}</button>
+      <button id="submit-btn">
+        if selectedId {
+          "Update"
+        } else {
+          "Add"
+        }
+      </button>
       if selectedId {
         <button hx-get="/deselect" hx-swap="none" type="button">
           Cancel
