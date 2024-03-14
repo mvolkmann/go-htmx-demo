@@ -44,11 +44,11 @@ func rowsHandler(c echo.Context) error {
         dogSlice = append(dogSlice, dog)
     }
 	less := func(i, j int) bool {
-		return dogSlice[i].name < dogSlice[j].name
+		return dogSlice[i].Name < dogSlice[j].Name
 	}
     sort.Slice(dogSlice, less)
 	fmt.Println("dogSlice = %v\n", dogSlice)
-	return render(c, views.DogRows(dogSlice, true))
+	return render(c, views.DogRows(dogSlice))
 }
 
 func selectHandler(c echo.Context) error {
@@ -61,10 +61,10 @@ func updateDogHandler(c echo.Context) error {
   id := c.Param("id")
   name := c.FormValue("name")
   breed := c.FormValue("breed")
-  updatedDog := dogs.Dog {
-	id: id,
-	name: name,
-	breed: breed,
+  updatedDog := dogs.Dog{
+	Id: id,
+	Name: name,
+	Breed: breed,
   }
   dogMap[id] = updatedDog
 

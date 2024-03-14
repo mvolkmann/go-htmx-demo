@@ -7,9 +7,9 @@ import (
 )
 
 type Dog struct {
-    id string
-    name string
-    breed string
+    Id string
+    Name string
+    Breed string
 }
 
 type DogMap map[string]Dog
@@ -18,10 +18,10 @@ func Add(dogMap DogMap, name string, breed string) Dog {
 	fmt.Println("name =", name)
 	fmt.Println("breed =", breed)
 	dog := Dog{
-		id: uuid.NewString(),
-		name: name,
-		breed: breed,
+		Id: uuid.NewString(),
+		Name: name,
+		Breed: breed,
 	}
-	dogMap[dog.id] = dog
+	dogMap[dog.Id] = dog
 	return dog;
 }
