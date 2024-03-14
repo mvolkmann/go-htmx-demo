@@ -1,0 +1,20 @@
+<form hx-disabled-elt=\"#submit-btn\"
+ hx-put=\"
+\"
+ hx-post=\"/dog\" hx-target=\"tbody\" hx-swap=\"afterbegin\"
+><div><label for=\"name\">Name</label> <input id=\"name\" name=\"name\" required size=\"
+\" type=\"text\"
+ value=\"
+\"
+ value=\"\"
+></div><div><label for=\"breed\">Breed</label> <input id=\"breed\" name=\"breed\" required size=\"
+\" type=\"text\"
+ value=\"
+\"
+ value=\"\"
+></div><div class=\"buttons\"><button id=\"submit-btn\">
+\"Update\"
+\"Add\"
+</button> 
+<button hx-get=\"/deselect\" hx-swap=\"none\" type=\"button\">Cancel</button>
+</div></form>

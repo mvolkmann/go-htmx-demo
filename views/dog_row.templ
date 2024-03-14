@@ -1,6 +1,6 @@
 package views
 
-templ DogRow(dog Dog, updating bool) {
+templ DogRow(dog dogs.Dog, updating bool) {
     <tr class="on-hover" id={"row-" + dog.id}>
       if updating {
         hx-swap-oob="true"

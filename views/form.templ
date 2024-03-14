@@ -2,7 +2,7 @@ package views
 
 import "main"
 
-templ Form(selectedDog Dog) {
+templ Form(selectedDog dogs.Dog) {
   <form
     hx-disabled-elt="#submit-btn"
     if selectedDog {
