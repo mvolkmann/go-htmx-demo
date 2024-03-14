@@ -18,13 +18,12 @@ var selectedId = ""
 func createDogHandler(c echo.Context) error {
   name := c.FormValue("name")
   breed := c.FormValue("breed")
-  const dog = dogs.Add(dogMap, name, breed);
+  dog := dogs.Add(dogMap, name, breed);
   return c.HTML(http.StatusCreated, views.DogRow(dog));
 }
 
 func formHandler(c echo.Context) error {
-	const selectedDog = dogMap[selectedId]
-
+	selectedDog := dogMap[selectedId]
 	return render(c, views.Form(selectedDog))
 }
 
@@ -39,7 +38,7 @@ func render(ctx echo.Context, cmp templ.Component) error {
 }
 
 func rowsHandler(c echo.Context) error {
-    dogSlice := []dogs.Dog
+    dogSlice := []dogs.Dog{}
     for _, dog := range dogMap {
         dogSlice = append(dogSlice, dog)
     }
@@ -52,7 +51,7 @@ func rowsHandler(c echo.Context) error {
 }
 
 func selectHandler(c echo.Context) error {
-	selectedId := c.Param("id")
+	selectedId = c.Param("id")
 	c.Response().Header().Set("HX-Trigger", "selection-change")
 	return c.NoContent(http.StatusOK);
 }
@@ -61,7 +60,7 @@ func updateDogHandler(c echo.Context) error {
   id := c.Param("id")
   name := c.FormValue("name")
   breed := c.FormValue("breed")
-  const updatedDog = dogs.Dog {
+  updatedDog := dogs.Dog {
 	id: id,
 	name: name,
 	breed: breed,
