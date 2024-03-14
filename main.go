@@ -19,7 +19,7 @@ func createDogHandler(c echo.Context) error {
   name := c.FormValue("name")
   breed := c.FormValue("breed")
   dog := dogs.Add(dogMap, name, breed);
-  return c.HTML(http.StatusCreated, views.DogRow(dog));
+  return c.HTML(http.StatusCreated, views.DogRow(dog, false));
 }
 
 func formHandler(c echo.Context) error {
@@ -47,7 +47,7 @@ func rowsHandler(c echo.Context) error {
 	}
     sort.Slice(dogSlice, less)
 	fmt.Println("dogSlice = %v\n", dogSlice)
-	return render(c, views.DogRows(dogSlice))
+	return render(c, views.DogRows(dogSlice, true))
 }
 
 func selectHandler(c echo.Context) error {

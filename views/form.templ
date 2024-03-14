@@ -2,17 +2,15 @@ package views
 
 import "main"
 
-templ Form(dog Dog) {
+templ Form(selectedDog Dog) {
   <form
     hx-disabled-elt="#submit-btn"
-    if selectedId {
-       // Update an existing row.
-       hx-put='/dog/' + selectedId;
+    if selectedDog {
+       hx-put={"/dog/" + selectedDog.id}
     } else {
-      // Add a new row.
-      hx-post = '/dog';
-      hx-target = 'tbody';
-      hx-swap = 'afterbegin';
+      hx-post="/dog"
+      hx-target="tbody"
+      hx-swap="afterbegin"
     }
   >
     <div>
@@ -23,7 +21,11 @@ templ Form(dog Dog) {
         required
         size={30}
         type="text"
-        value={selectedDog?.name ?? ''}
+        if selectedDog {
+          value=selectedDog.name
+        } else {
+          value=""
+        }
       />
     </div>
     <div>
@@ -34,17 +36,21 @@ templ Form(dog Dog) {
         required
         size={30}
         type="text"
-        value={selectedDog?.breed ?? ''}
+        if selectedDog {
+          value=selectedDog.breed
+        } else {
+          value=""
+        }
       />
     </div>
 
     <div class="buttons">
       <button id="submit-btn">{selectedId ? 'Update' : 'Add'}</button>
-      {selectedId && (
+      if selectedId {
         <button hx-get="/deselect" hx-swap="none" type="button">
           Cancel
         </button>
-      )}
+      }
     </div>
   </form>
 }
