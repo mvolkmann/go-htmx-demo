@@ -19,4 +19,8 @@ Here are the commands I ran to create this project:
 
 - `go run .`
 
-  This outputs "<div>Hello, John</div>".
+  This outputs:
+
+  ```html
+  <div>Hello, John</div>
+  ```
