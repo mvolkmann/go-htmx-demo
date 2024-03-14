@@ -17,10 +17,20 @@ Here are the commands I ran to create this project:
 
   This creates the file `hello_templ.go`.
 
-- `go run .`
+- `go get github.com/labstack/echo/v4`
+- `go get github.com/labstack/echo/v4/middleware`
 
-  This outputs:
+  This is a popular HTTP server library.
 
-  ```html
-  <div>Hello, John</div>
-  ```
+- `go install github.com/cosmtrek/air@latest`
+- `go get -u github.com/cosmtrek/air`
+
+  This provides live reload of Go servers when code changes are detected.
+
+- `air`
+
+  This starts a server that listens on port 3000.
+
+- browse localhost:3000
+
+  This renders "Hello, John".
