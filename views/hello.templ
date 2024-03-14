@@ -1,5 +1,7 @@
 package views
 
-templ hello(name string) {
+templ Hello(name string) {
+  @Layout("Hello") {
 	<div>Hello, { name }</div>
+  }
 }

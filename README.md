@@ -15,9 +15,16 @@ Here are the commands I ran to create this project:
 - `go install github.com/a-h/templ/cmd/templ@latest`
 - `go mod init github.com/a-h/templ-examples/hello-world`
 - `go mod tidy`
-- `templ generate`
+- `go install golang.org/x/lint/golint`
 
-  This creates the file `hello_templ.go`.
+  This installs the command "golint".
+  To lint a file, enter `golint {name}.go`.
+
+- `templ generate --watch`
+
+  This creates a `.go` file for every `.templ` file
+  in and below the current directory.
+  It watches for changes and creates new `.go` files as needed.
 
 - `go get github.com/labstack/echo/v4`
 - `go get github.com/labstack/echo/v4/middleware`
