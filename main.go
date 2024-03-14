@@ -19,7 +19,8 @@ func createDogHandler(c echo.Context) error {
   name := c.FormValue("name")
   breed := c.FormValue("breed")
   dog := dogs.Add(dogMap, name, breed);
-  return c.HTML(http.StatusCreated, views.DogRow(dog, false));
+  return render(c, views.DogRow(dog, false));
+  // templ.WithStatus(http.StatusCreated)
 }
 
 func formHandler(c echo.Context) error {
@@ -69,7 +70,7 @@ func updateDogHandler(c echo.Context) error {
 
   selectedId = "";
   c.Response().Header().Set("HX-Trigger", "selection-change")
-  return c.HTML(http.StatusCreated, views.DogRow(updatedDog));
+  return render(c, views.DogRow(updatedDog, true));
 }
 
 func main() {
