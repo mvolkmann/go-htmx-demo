@@ -1,0 +1,30 @@
+package views
+
+templ DogRow(dog Dog) {
+    <tr class="on-hover" id={`row-${dog.id}`} {...attrs}>
+      <td>{dog.name}</td>
+      <td>{dog.breed}</td>
+      <td class="buttons">
+        <button
+          class="show-on-hover"
+          hx-confirm="Are you sure?"
+          hx-delete={`/dog/${dog.id}`}
+          hx-target="closest tr"
+          hx-swap="outerHTML"
+          type="button"
+        >
+          ✕
+        </button>
+        {/* This selects the dog which triggers a selection-change event
+            which causes the form to update. */}
+        <button
+          class="show-on-hover"
+          hx-get={'/select/' + dog.id}
+          hx-swap="none"
+          type="button"
+        >
+          ✎
+        </button>
+      </td>
+    </tr>
+}
