@@ -84,9 +84,6 @@ func updateHandler(c echo.Context) error {
 }
 
 func main() {
-	// sum := utils.Add(1, 2);
-    // fmt.Println("main: sum =", sum)
-
 	model.AddDog(dogMap, "Comet", "Whippet")
 	model.AddDog(dogMap, "Oscar", "German Shorthaired Pointer")
 
