@@ -5,6 +5,7 @@ import "htmx-demo/model"
 templ Form(selectedDog *model.Dog) {
   <form
     hx-disabled-elt="#submit-btn"
+    hx-on:htmx:after-request="this.reset()"
     if selectedDog != nil {
        hx-put={"/dog/" + selectedDog.Id}
     } else {

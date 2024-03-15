@@ -1,4 +1,4 @@
-<form hx-disabled-elt=\"#submit-btn\"
+<form hx-disabled-elt=\"#submit-btn\" hx-on:htmx:after-request=\"this.reset()\"
  hx-put=\"
 \"
  hx-post=\"/dog\" hx-target=\"tbody\" hx-swap=\"afterbegin\"

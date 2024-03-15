@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"htmx-demo/model"
 	"htmx-demo/views"
 	"net/http"
@@ -36,7 +35,6 @@ func deselectHandler(c echo.Context) error {
 }
 
 func formHandler(c echo.Context) error {
-	fmt.Printf("\nformHandler: selectedId = %v\n", selectedId)
 	selectedDog, found := dogMap[selectedId]
 	var dogPtr *model.Dog
 	if found {
@@ -44,7 +42,6 @@ func formHandler(c echo.Context) error {
 	} else {
 		dogPtr = nil
 	}
-	// fmt.Printf("formHandler: selectedDog = %v\n\n", selectedDog)
 	return render(c, views.Form(dogPtr))
 }
 
@@ -61,7 +58,6 @@ func rowsHandler(c echo.Context) error {
 		return dogSlice[i].Name < dogSlice[j].Name
 	}
     sort.Slice(dogSlice, less)
-	fmt.Printf("rowsHandler: dogSlice = %v", dogSlice)
 	return render(c, views.DogRows(dogSlice))
 }
 
@@ -73,11 +69,8 @@ func selectHandler(c echo.Context) error {
 
 func updateHandler(c echo.Context) error {
   id := c.Param("id")
-  fmt.Println("updateDogHandler: id =", id);
   name := c.FormValue("name")
-  fmt.Println("updateDogHandler: name =", name);
   breed := c.FormValue("breed")
-  fmt.Println("updateDogHandler: breed =", breed);
   updatedDog := model.Dog{
 	Id: id,
 	Name: name,
@@ -96,7 +89,6 @@ func main() {
 
 	model.AddDog(dogMap, "Comet", "Whippet")
 	model.AddDog(dogMap, "Oscar", "German Shorthaired Pointer")
-    fmt.Printf("main: dogMap = %v", dogMap)
 
 	e := echo.New()
 	e.Use(middleware.Logger())
