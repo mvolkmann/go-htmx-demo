@@ -18,8 +18,8 @@ func createHandler(c echo.Context) error {
   name := c.FormValue("name")
   breed := c.FormValue("breed")
   dog := model.AddDog(dogMap, name, breed);
+  c.Response().Status = http.StatusCreated
   return render(c, views.DogRow(dog, false));
-  // templ.WithStatus(http.StatusCreated)
 }
 
 func deleteHandler(c echo.Context) error {
@@ -45,8 +45,8 @@ func formHandler(c echo.Context) error {
 	return render(c, views.Form(dogPtr))
 }
 
-func render(ctx echo.Context, cmp templ.Component) error {
-	return cmp.Render(ctx.Request().Context(), ctx.Response())
+func render(c echo.Context, cmp templ.Component) error {
+	return cmp.Render(c.Request().Context(), c.Response())
 }
 
 func rowsHandler(c echo.Context) error {

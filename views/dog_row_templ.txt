@@ -1,8 +1,0 @@
-<tr class=\"on-hover\" id=\"
-\"
- hx-swap-oob=\"true\"
-><td>
-</td><td>
-</td><td class=\"buttons\"><button class=\"show-on-hover\" hx-confirm=\"Are you sure?\" hx-delete=\"
-\" hx-target=\"closest tr\" hx-swap=\"outerHTML\" type=\"button\">✕</button><!-- This selects the dog which triggers a selection-change event\n             which causes the form to update. --><button class=\"show-on-hover\" hx-get=\"
-\" hx-swap=\"none\" type=\"button\">✎</button></td></tr>
