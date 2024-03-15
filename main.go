@@ -71,8 +71,8 @@ func main() {
 	// sum := utils.Add(1, 2);
     // fmt.Println("sum =", sum)
 
-	model.Add(dogMap, "Comet", "Whippet")
-	model.Add(dogMap, "Oscar", "German Shorthaired Pointer")
+	model.AddDog(dogMap, "Comet", "Whippet")
+	model.AddDog(dogMap, "Oscar", "German Shorthaired Pointer")
     fmt.Println("dogMap =", dogMap)
 
 	e := echo.New()

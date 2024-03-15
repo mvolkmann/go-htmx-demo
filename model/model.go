@@ -14,7 +14,7 @@ type Dog struct {
 
 type DogMap map[string]Dog
 
-func Add(dogMap DogMap, name string, breed string) Dog {
+func AddDog(dogMap DogMap, name string, breed string) Dog {
 	fmt.Println("name =", name)
 	fmt.Println("breed =", breed)
 	dog := Dog{
