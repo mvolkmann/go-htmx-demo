@@ -41,5 +41,3 @@ Here are the commands I ran to create this project:
   This starts a server that listens on port 3000.
 
 - browse localhost:3000
-
-  This renders "Hello, John".
