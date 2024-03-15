@@ -1,9 +1,9 @@
 package views
 
-import "dogs"
+import "htmx-demo/model"
 
-templ DogRows(dogs []dogs.Dog) {
+templ DogRows(dogs []model.Dog) {
     for _, dog := range dogs {
-        DogRow(dog)
+        @DogRow(dog, false)
     }
 }

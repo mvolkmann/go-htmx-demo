@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"htmx-demo/dogs"
+	"htmx-demo/model"
 	"htmx-demo/views"
 	"net/http"
 	"sort"
@@ -12,26 +12,20 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-var dogMap = dogs.DogMap{}
+var dogMap = model.DogMap{}
 var selectedId = ""
 
 func createDogHandler(c echo.Context) error {
   name := c.FormValue("name")
   breed := c.FormValue("breed")
-  dog := dogs.Add(dogMap, name, breed);
+  dog := model.Add(dogMap, name, breed);
   return render(c, views.DogRow(dog, false));
   // templ.WithStatus(http.StatusCreated)
 }
 
 func formHandler(c echo.Context) error {
 	selectedDog := dogMap[selectedId]
-	return render(c, views.Form(selectedDog))
-}
-
-// This is just for testing.
-func homeHandler(c echo.Context) error {
-	return render(c, views.Hello("John"))
-	// return render(c, views.Home("Page Title"))
+	return render(c, views.Form(&selectedDog))
 }
 
 func render(ctx echo.Context, cmp templ.Component) error {
@@ -39,7 +33,7 @@ func render(ctx echo.Context, cmp templ.Component) error {
 }
 
 func rowsHandler(c echo.Context) error {
-    dogSlice := []dogs.Dog{}
+    dogSlice := []model.Dog{}
     for _, dog := range dogMap {
         dogSlice = append(dogSlice, dog)
     }
@@ -61,7 +55,7 @@ func updateDogHandler(c echo.Context) error {
   id := c.Param("id")
   name := c.FormValue("name")
   breed := c.FormValue("breed")
-  updatedDog := dogs.Dog{
+  updatedDog := model.Dog{
 	Id: id,
 	Name: name,
 	Breed: breed,
@@ -77,8 +71,8 @@ func main() {
 	// sum := utils.Add(1, 2);
     // fmt.Println("sum =", sum)
 
-	dogs.Add(dogMap, "Comet", "Whippet")
-	dogs.Add(dogMap, "Oscar", "German Shorthaired Pointer")
+	model.Add(dogMap, "Comet", "Whippet")
+	model.Add(dogMap, "Oscar", "German Shorthaired Pointer")
     fmt.Println("dogMap =", dogMap)
 
 	e := echo.New()

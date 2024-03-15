@@ -1,13 +1,12 @@
 package views
 
-// import "main"
-import "dogs"
+import "htmx-demo/model"
 
-templ Form(selectedDog dogs.Dog) {
+templ Form(selectedDog *model.Dog) {
   <form
     hx-disabled-elt="#submit-btn"
-    if selectedDog {
-       hx-put={"/dog/" + selectedDog.id}
+    if selectedDog != nil {
+       hx-put={"/dog/" + selectedDog.Id}
     } else {
       hx-post="/dog"
       hx-target="tbody"
@@ -20,10 +19,10 @@ templ Form(selectedDog dogs.Dog) {
         id="name"
         name="name"
         required
-        size={30}
+        size="30"
         type="text"
-        if selectedDog {
-          value={selectedDog.name}
+        if selectedDog != nil {
+          value={selectedDog.Name}
         } else {
           value=""
         }
@@ -35,10 +34,10 @@ templ Form(selectedDog dogs.Dog) {
         id="breed"
         name="breed"
         required
-        size={30}
+        size="30"
         type="text"
-        if selectedDog {
-          value={selectedDog.breed}
+        if selectedDog != nil {
+          value={selectedDog.Breed}
         } else {
           value=""
         }
@@ -47,13 +46,13 @@ templ Form(selectedDog dogs.Dog) {
 
     <div class="buttons">
       <button id="submit-btn">
-        if selectedDog.Id {
+        if selectedDog != nil {
           "Update"
         } else {
           "Add"
         }
       </button>
-      if selectedDog.Id {
+      if selectedDog != nil {
         <button hx-get="/deselect" hx-swap="none" type="button">
           Cancel
         </button>

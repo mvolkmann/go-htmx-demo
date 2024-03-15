@@ -1,19 +1,19 @@
 package views
 
-import "dogs"
+import "htmx-demo/model"
 
-templ DogRow(dog dogs.Dog, updating bool) {
-    <tr class="on-hover" id={"row-" + dog.id}>
+templ DogRow(dog model.Dog, updating bool) {
+    <tr class="on-hover" id={"row-" + dog.Id}>
       if updating {
         hx-swap-oob="true"
       }
-      <td>{dog.name}</td>
-      <td>{dog.breed}</td>
+      <td>{dog.Name}</td>
+      <td>{dog.Breed}</td>
       <td class="buttons">
         <button
           class="show-on-hover"
           hx-confirm="Are you sure?"
-          hx-delete={"/dog/" + dog.id}
+          hx-delete={"/dog/" + dog.Id}
           hx-target="closest tr"
           hx-swap="outerHTML"
           type="button"
@@ -24,7 +24,7 @@ templ DogRow(dog dogs.Dog, updating bool) {
              which causes the form to update. -->
         <button
           class="show-on-hover"
-          hx-get={"/select/" + dog.id}
+          hx-get={"/select/" + dog.Id}
           hx-swap="none"
           type="button"
         >
