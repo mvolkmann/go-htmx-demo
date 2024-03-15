@@ -10,7 +10,8 @@ import "context"
 import "io"
 import "bytes"
 
-import "main"
+// import "main"
+import "dogs"
 
 func Form(selectedDog dogs.Dog) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
@@ -114,7 +115,7 @@ func Form(selectedDog dogs.Dog) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if selectedId {
+		if selectedDog.Id {
 			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 16)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -129,7 +130,7 @@ func Form(selectedDog dogs.Dog) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if selectedId {
+		if selectedDog.Id {
 			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 19)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

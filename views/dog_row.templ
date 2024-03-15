@@ -1,5 +1,7 @@
 package views
 
+import "dogs"
+
 templ DogRow(dog dogs.Dog, updating bool) {
     <tr class="on-hover" id={"row-" + dog.id}>
       if updating {

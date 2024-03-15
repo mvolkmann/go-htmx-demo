@@ -1,6 +1,7 @@
 package views
 
-import "main"
+// import "main"
+import "dogs"
 
 templ Form(selectedDog dogs.Dog) {
   <form
@@ -46,13 +47,13 @@ templ Form(selectedDog dogs.Dog) {
 
     <div class="buttons">
       <button id="submit-btn">
-        if selectedId {
+        if selectedDog.Id {
           "Update"
         } else {
           "Add"
         }
       </button>
-      if selectedId {
+      if selectedDog.Id {
         <button hx-get="/deselect" hx-swap="none" type="button">
           Cancel
         </button>
