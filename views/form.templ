@@ -46,10 +46,10 @@ templ Form(selectedDog *model.Dog) {
 
     <div class="buttons">
       <button id="submit-btn">
-        if selectedDog != nil {
-          "Update"
+        if selectedDog == nil {
+          Add
         } else {
-          "Add"
+          Update
         }
       </button>
       if selectedDog != nil {

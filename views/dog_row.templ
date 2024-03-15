@@ -3,10 +3,13 @@ package views
 import "htmx-demo/model"
 
 templ DogRow(dog model.Dog, updating bool) {
-    <tr class="on-hover" id={"row-" + dog.Id}>
+    <tr
+      class="on-hover"
+      id={"row-" + dog.Id}
       if updating {
         hx-swap-oob="true"
       }
+    >
       <td>{dog.Name}</td>
       <td>{dog.Breed}</td>
       <td class="buttons">

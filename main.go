@@ -15,17 +15,37 @@ import (
 var dogMap = model.DogMap{}
 var selectedId = ""
 
-func createDogHandler(c echo.Context) error {
+func createHandler(c echo.Context) error {
   name := c.FormValue("name")
   breed := c.FormValue("breed")
-  dog := model.Add(dogMap, name, breed);
+  dog := model.AddDog(dogMap, name, breed);
   return render(c, views.DogRow(dog, false));
   // templ.WithStatus(http.StatusCreated)
 }
 
+func deleteHandler(c echo.Context) error {
+	id := c.Param("id")
+    delete(dogMap, id)
+	return c.NoContent(http.StatusOK);
+}
+
+func deselectHandler(c echo.Context) error {
+	selectedId = ""
+	c.Response().Header().Set("HX-Trigger", "selection-change")
+	return c.NoContent(http.StatusOK);
+}
+
 func formHandler(c echo.Context) error {
-	selectedDog := dogMap[selectedId]
-	return render(c, views.Form(&selectedDog))
+	fmt.Printf("\nformHandler: selectedId = %v\n", selectedId)
+	selectedDog, found := dogMap[selectedId]
+	var dogPtr *model.Dog
+	if found {
+		dogPtr = &selectedDog
+	} else {
+		dogPtr = nil
+	}
+	// fmt.Printf("formHandler: selectedDog = %v\n\n", selectedDog)
+	return render(c, views.Form(dogPtr))
 }
 
 func render(ctx echo.Context, cmp templ.Component) error {
@@ -41,7 +61,7 @@ func rowsHandler(c echo.Context) error {
 		return dogSlice[i].Name < dogSlice[j].Name
 	}
     sort.Slice(dogSlice, less)
-	fmt.Println("dogSlice = %v\n", dogSlice)
+	fmt.Printf("rowsHandler: dogSlice = %v", dogSlice)
 	return render(c, views.DogRows(dogSlice))
 }
 
@@ -51,10 +71,13 @@ func selectHandler(c echo.Context) error {
 	return c.NoContent(http.StatusOK);
 }
 
-func updateDogHandler(c echo.Context) error {
+func updateHandler(c echo.Context) error {
   id := c.Param("id")
+  fmt.Println("updateDogHandler: id =", id);
   name := c.FormValue("name")
+  fmt.Println("updateDogHandler: name =", name);
   breed := c.FormValue("breed")
+  fmt.Println("updateDogHandler: breed =", breed);
   updatedDog := model.Dog{
 	Id: id,
 	Name: name,
@@ -69,23 +92,24 @@ func updateDogHandler(c echo.Context) error {
 
 func main() {
 	// sum := utils.Add(1, 2);
-    // fmt.Println("sum =", sum)
+    // fmt.Println("main: sum =", sum)
 
 	model.AddDog(dogMap, "Comet", "Whippet")
 	model.AddDog(dogMap, "Oscar", "German Shorthaired Pointer")
-    fmt.Println("dogMap =", dogMap)
+    fmt.Printf("main: dogMap = %v", dogMap)
 
 	e := echo.New()
 	e.Use(middleware.Logger())
     e.Static("/", "public")
     e.File("/", "public/index.html")
 
-	// e.GET("/", homeHandler)
+	e.GET("/deselect", deselectHandler)
 	e.GET("/form", formHandler)
 	e.GET("/rows", rowsHandler)
 	e.GET("/select/:id", selectHandler)
-	e.POST("/dog", createDogHandler)
-	e.PUT("/dog", updateDogHandler)
+	e.POST("/dog", createHandler)
+	e.PUT("/dog/:id", updateHandler)
+	e.DELETE("/dog/:id", deleteHandler)
 
 	e.Logger.Fatal(e.Start(":3000"))
 }
